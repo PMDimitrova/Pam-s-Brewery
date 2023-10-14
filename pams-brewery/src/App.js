@@ -1,7 +1,17 @@
-import './App.css';
+import { useRoutes } from 'react-router-dom';
+
+import Header from './components/header/Header';
+import routesMap from './_constants/routesMap';
 
 const App = () => {
-  return <div className="App">Starting Point App.js</div>;
+  const content = useRoutes(routesMap);
+
+  return (
+    <div>
+      <Header />
+      {content}
+    </div>
+  );
 };
 
 export default App;
