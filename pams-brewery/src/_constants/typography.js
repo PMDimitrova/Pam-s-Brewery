@@ -12,10 +12,10 @@ const typography = {
   },
   body: {
     1: {
-      font_size: 14,
+      font_size: 16,
     },
     2: {
-      font_size: 16,
+      font_size: 14,
     },
   },
 };

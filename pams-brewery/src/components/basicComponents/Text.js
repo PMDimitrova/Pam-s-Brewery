@@ -19,6 +19,7 @@ const Text = ({
   isOverflowingEllipsis = false,
   textTransform,
   maxWidth, // Only string, so use 'px' as suffice
+  isNotSelectable,
 }) => {
   return (
     <Wrap
@@ -30,10 +31,12 @@ const Text = ({
       $textTransform={textTransform}
       id={id}
       onClick={onClick}
+      $cursor={onClick ? 'pointer' : 'inherit'}
       as={component || (heading ? `h${heading}` : undefined)}
       $textAlign={textAlign}
       $withEllipsis={isOverflowingEllipsis}
       $maxWidth={maxWidth}
+      $isNotSelectable={isNotSelectable}
     >
       {children || text}
     </Wrap>
@@ -46,7 +49,7 @@ Text.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
   heading: PropTypes.oneOf([1, 2, 3]),
   body: PropTypes.oneOf([1, 2]),
-  text: PropTypes.text,
+  text: PropTypes.string,
   component: PropTypes.oneOf(['div', 'span', 'p']),
   weight: PropTypes.oneOf([400, 500, 700]),
   id: PropTypes.string,
@@ -57,6 +60,7 @@ Text.propTypes = {
   isOverflowingEllipsis: PropTypes.bool,
   textTransform: PropTypes.oneOf(['capitalize', 'uppercase', 'lowercase', 'none']),
   maxWidth: PropTypes.string,
+  isNotSelectable: PropTypes.bool,
 };
 
 const Wrap = styled.div`
@@ -65,12 +69,15 @@ const Wrap = styled.div`
   text-transform: ${props => props.$textTransform};
   max-width: ${props => props.$maxWidth};
   color: ${props => colors[props.$textColor]};
+  transition: color 0.3s ease;
   text-align: ${props => props.$textAlign};
   text-overflow: ${props => (props.$withEllipsis ? 'ellipsis' : undefined)};
   overflow: ${props => (props.$withEllipsis ? 'hidden' : undefined)};
+  cursor: ${props => props.$cursor};
+  user-select: ${props => (props.$isNotSelectable ? 'none' : 'auto')};
 
   &:hover {
-    color: ${props => props.$hoverColor};
+    color: ${props => colors[props.$hoverColor]};
   }
 
   a {
