@@ -24,7 +24,6 @@ const Header = () => {
           text="home"
           heading={3}
           textTransform="uppercase"
-          weight={500}
           onHoverColor="fontSecondary"
           onClick={() => navigate('/')}
         />
@@ -32,7 +31,6 @@ const Header = () => {
           text="catalogue"
           heading={3}
           textTransform="uppercase"
-          weight={500}
           onHoverColor="fontSecondary"
           onClick={() => navigate('/catalogue')}
         />
@@ -41,7 +39,6 @@ const Header = () => {
           heading={3}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
-          weight={500}
           onClick={() => navigate('/favorites')}
         />
         <Text
@@ -49,7 +46,6 @@ const Header = () => {
           heading={3}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
-          weight={500}
           onClick={() => navigate('/on-adventure')}
         />
       </Stack>
@@ -63,6 +59,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   position: sticky;
+  z-index: 999;
   top: 0;
   height: 64px;
   padding: 0 16px;

@@ -2,12 +2,12 @@ import CataloguePage from '../components/CataloguePage';
 import AdventurePage from '../components/AdventurePage';
 import FavoritesPage from '../components/FavoritesPage';
 import ErrorPage from '../components/ErrorPage';
-import Home from '../components/Home';
+import HomePage from '../components/HomePage';
 
 const routesStructure = {
   home: {
     path: '/',
-    element: <Home />,
+    element: <HomePage />,
   },
   catalogue: {
     path: '/catalogue',

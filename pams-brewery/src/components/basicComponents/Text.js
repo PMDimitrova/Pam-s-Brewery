@@ -51,7 +51,7 @@ Text.propTypes = {
   body: PropTypes.oneOf([1, 2]),
   text: PropTypes.string,
   component: PropTypes.oneOf(['div', 'span', 'p']),
-  weight: PropTypes.oneOf([400, 500, 700]),
+  weight: PropTypes.oneOf([400, 500, 700, 900]),
   id: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf(['fontSecondary', 'fontMain', 'fontHover']),
