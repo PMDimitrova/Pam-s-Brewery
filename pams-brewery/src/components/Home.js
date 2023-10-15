@@ -1,5 +1,55 @@
 const Home = () => {
-  return <div> HOOOOOMEEEE</div>;
+  return (
+    <>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+      <div>home</div>
+    </>
+  );
 };
 
 export default Home;
