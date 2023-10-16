@@ -15,24 +15,24 @@ const Home = () => {
         <img src={barrels} alt="beer barrel" />
       </Stack>
 
-      <Stack position="absolute" top="30%" left="10%">
-        <Text text="Wondering what kind of beer you want today?" heading={1} />
-        <Text text="You are in the right place!" heading={1} weight={700} />
+      <Stack position="absolute" top="20%" left="10%">
+        <Text text="Wondering what kind of beer you want today?" heading={1} isNotSelectable />
+        <Text text="You are in the right place!" heading={1} weight={700} isNotSelectable />
 
         <Stack direction="row" spacing={4}>
-          <Text text="Go check our" heading={1} />
+          <Text text="Go check our" heading={1} isNotSelectable />
           <Text text="Catalogue" heading={1} onHoverColor="fontSecondary" onClick={() => navigate('/catalogue')} />
         </Stack>
 
         <Stack direction="row" spacing={4}>
-          <Text text="Or go" heading={1} />
+          <Text text="Or go" heading={1} isNotSelectable />
           <Text
             text="on adventure"
             heading={1}
             onHoverColor="fontSecondary"
             onClick={() => navigate('/on-adventure')}
           />
-          <Text text="and see what the Universe will suggest to you" heading={1} />
+          <Text text="and see what the Universe will suggest to you" heading={1} isNotSelectable />
         </Stack>
       </Stack>
     </Wrap>

@@ -47,7 +47,7 @@ export default Text;
 
 Text.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
-  heading: PropTypes.oneOf([1, 2, 3]),
+  heading: PropTypes.oneOf([1, 2, 3, 4]),
   body: PropTypes.oneOf([1, 2]),
   text: PropTypes.string,
   component: PropTypes.oneOf(['div', 'span', 'p']),

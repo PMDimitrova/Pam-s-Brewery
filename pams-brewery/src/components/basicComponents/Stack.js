@@ -33,6 +33,7 @@ const Stack = ({
   paddingTop,
   paddingBottom,
   onClick,
+  flexWrap,
   id,
 }) => {
   const directionMarginProp = {
@@ -75,6 +76,7 @@ const Stack = ({
       $paddingTop={paddingTop}
       $paddingBottom={paddingBottom}
       $cursor={onClick ? 'pointer' : cursor}
+      $flexWrap={flexWrap}
     >
       {children}
     </Wrap>
@@ -126,11 +128,13 @@ Stack.propTypes = {
   bottom: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   left: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   right: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  flexWrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse', 'inherit']),
 };
 
 const Wrap = styled.div`
   display: flex;
   flex: ${props => props.$flex};
+  flex-wrap: ${props => props.$flexWrap};
   position: ${props => props.$position};
   justify-content: ${props => props.$justifyContent};
   flex-direction: ${props => props.$direction};
@@ -146,16 +150,16 @@ const Wrap = styled.div`
   min-width: ${props => props.$minWidth};
   max-height: ${props => props.$minWidth};
   min-height: ${props => props.$minWidth};
-  margin: ${props => (props.$minWidth ? `${props.$margin}px` : undefined)};
-  margin-left: ${props => (props.$minWidth ? `${props.$marginLeft}px` : undefined)};
-  margin-right: ${props => (props.$minWidth ? `${props.$marginRight}px` : undefined)};
-  margin-top: ${props => (props.$minWidth ? `${props.$marginTop}px` : undefined)};
-  margin-bottom: ${props => (props.$minWidth ? `${props.$marginBottom}px` : undefined)};
-  padding: ${props => (props.$minWidth ? `${props.$padding}px` : undefined)};
-  padding-left: ${props => (props.$minWidth ? `${props.$paddingLeft}px` : undefined)};
-  padding-right: ${props => (props.$minWidth ? `${props.$paddingRight}px` : undefined)};
-  padding-top: ${props => (props.$minWidth ? `${props.$paddingTop}px` : undefined)};
-  padding-bottom: ${props => (props.$minWidth ? `${props.$paddingBottom}px` : undefined)};
+  margin: ${props => (props.$margin ? `${props.$margin}px` : undefined)};
+  margin-left: ${props => (props.$marginLeft ? `${props.$marginLeft}px` : undefined)};
+  margin-right: ${props => (props.$marginRight ? `${props.$marginRight}px` : undefined)};
+  margin-top: ${props => (props.$marginTop ? `${props.$marginTop}px` : undefined)};
+  margin-bottom: ${props => (props.$marginBottom ? `${props.$marginBottom}px` : undefined)};
+  padding: ${props => (props.$padding ? `${props.$padding}px` : undefined)};
+  padding-left: ${props => (props.$paddingLeft ? `${props.$paddingLeft}px` : undefined)};
+  padding-right: ${props => (props.$paddingRight ? `${props.$paddingRight}px` : undefined)};
+  padding-top: ${props => (props.$paddingTop ? `${props.$paddingTop}px` : undefined)};
+  padding-bottom: ${props => (props.$paddingBottom ? `${props.$paddingBottom}px` : undefined)};
   cursor: ${props => (props.$onClick ? 'pointer' : props.$cursor)};
 
   & > *:not(:last-child) {

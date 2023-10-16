@@ -16,37 +16,41 @@ const Header = () => {
           <img src={logo} alt="beers-logo" width="75px" />
         </Stack>
 
-        <Text text="Pam`s little beer catalogue" heading={1} weight={700} isNotSelectable />
+        <Text text="Pam`s little beer catalogue" heading={2} weight={700} isNotSelectable />
       </Stack>
 
       <Stack direction="row" spacing={16} alignItems="center">
         <Text
           text="home"
-          heading={3}
+          heading={4}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
           onClick={() => navigate('/')}
+          isNotSelectable
         />
         <Text
           text="catalogue"
-          heading={3}
+          heading={4}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
           onClick={() => navigate('/catalogue')}
+          isNotSelectable
         />
         <Text
           text="favorites"
-          heading={3}
+          heading={4}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
           onClick={() => navigate('/favorites')}
+          isNotSelectable
         />
         <Text
           text="adventure"
-          heading={3}
+          heading={4}
           textTransform="uppercase"
           onHoverColor="fontSecondary"
           onClick={() => navigate('/on-adventure')}
+          isNotSelectable
         />
       </Stack>
     </Wrap>
