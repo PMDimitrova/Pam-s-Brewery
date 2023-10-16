@@ -24,7 +24,7 @@ const Header = () => {
           text="home"
           heading={4}
           textTransform="uppercase"
-          onHoverColor="fontSecondary"
+          onHoverColor="textSecondary"
           onClick={() => navigate('/')}
           isNotSelectable
         />
@@ -32,7 +32,7 @@ const Header = () => {
           text="catalogue"
           heading={4}
           textTransform="uppercase"
-          onHoverColor="fontSecondary"
+          onHoverColor="textSecondary"
           onClick={() => navigate('/catalogue')}
           isNotSelectable
         />
@@ -40,7 +40,7 @@ const Header = () => {
           text="favorites"
           heading={4}
           textTransform="uppercase"
-          onHoverColor="fontSecondary"
+          onHoverColor="textSecondary"
           onClick={() => navigate('/favorites')}
           isNotSelectable
         />
@@ -48,7 +48,7 @@ const Header = () => {
           text="adventure"
           heading={4}
           textTransform="uppercase"
-          onHoverColor="fontSecondary"
+          onHoverColor="textSecondary"
           onClick={() => navigate('/on-adventure')}
           isNotSelectable
         />

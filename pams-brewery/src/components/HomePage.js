@@ -21,7 +21,7 @@ const Home = () => {
 
         <Stack direction="row" spacing={4}>
           <Text text="Go check our" heading={1} isNotSelectable />
-          <Text text="Catalogue" heading={1} onHoverColor="fontSecondary" onClick={() => navigate('/catalogue')} />
+          <Text text="Catalogue" heading={1} onHoverColor="textSecondary" onClick={() => navigate('/catalogue')} />
         </Stack>
 
         <Stack direction="row" spacing={4}>
@@ -29,7 +29,7 @@ const Home = () => {
           <Text
             text="on adventure"
             heading={1}
-            onHoverColor="fontSecondary"
+            onHoverColor="textSecondary"
             onClick={() => navigate('/on-adventure')}
           />
           <Text text="and see what the Universe will suggest to you" heading={1} isNotSelectable />

@@ -1,5 +1,8 @@
 const beerState = {
   allBeers: [],
+  randomBeer: undefined,
+  shouldFetchBeers: false,
+  shouldGetRandomBeer: false,
 };
 
 const userState = {

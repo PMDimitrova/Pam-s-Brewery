@@ -21,6 +21,8 @@ const App = () => {
 export default App;
 
 const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background-color: ${props => props.$backgroundColor};
 `;

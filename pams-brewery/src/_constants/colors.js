@@ -1,10 +1,12 @@
 const colors = {
   background: '#1E1E1E',
-  fontMain: '#FFFFFF',
-  fontSecondary: '#FCC901',
-  fontHover: '#FDFBDD',
+  textMain: '#FFFFFF',
+  textSecondary: '#FCC901',
+  textHover: '#FDFBDD',
+  btnBackgroundMain: '#DA9211',
+  btnBackgroundHover: '#F8B61B',
 };
 
-// TODO: when color is added, check PropTypes in Text component. If there's any time left - think for an abstraction
+// When color for text is added, check PropTypes in Text component. If there's any time left - think for an abstraction
 
 export default colors;

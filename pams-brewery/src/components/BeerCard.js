@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
@@ -20,7 +21,7 @@ const BeerCard = ({ beer, marginBottom }) => {
           </Stack>
 
           <Stack>
-            <Text text={name} heading={3} maxWidth="100px" color="fontMain" weight={900} />
+            <Text text={name} heading={3} maxWidth="100px" weight={900} />
           </Stack>
         </Stack>
       </HoverCard>
@@ -29,6 +30,11 @@ const BeerCard = ({ beer, marginBottom }) => {
 };
 
 export default BeerCard;
+
+BeerCard.propTypes = {
+  beer: PropTypes.object,
+  marginBottom: PropTypes.string,
+};
 
 // TODO: width & height should not be static
 
