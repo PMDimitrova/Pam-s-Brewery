@@ -8,8 +8,6 @@ import colors from '../_constants/colors';
 // TODO: what would happen, if the api doesn't return a beer.?
 
 const RevealCard = ({ beerToShow, shouldShowBeer }) => {
-  console.log('shouldShowBeer: ', shouldShowBeer);
-
   return (
     <Wrap>
       {shouldShowBeer && (

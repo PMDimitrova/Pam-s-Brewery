@@ -5,11 +5,11 @@ import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
 import colors from '../_constants/colors';
 
-const BeerCard = ({ beer, marginBottom }) => {
+const BeerCard = ({ beer, marginBottom, onClick }) => {
   const { name, image_url } = beer;
 
   return (
-    <Stack position="relative" maxWidth="100%">
+    <Stack position="relative" maxWidth="100%" onClick={() => onClick()}>
       <Card $marginBottom={marginBottom}>
         <img src={image_url} height={350} alt="beer" />
       </Card>
@@ -34,6 +34,7 @@ export default BeerCard;
 BeerCard.propTypes = {
   beer: PropTypes.object,
   marginBottom: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 // TODO: width & height should not be static

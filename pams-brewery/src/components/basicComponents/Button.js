@@ -7,7 +7,7 @@ import colors from '../../_constants/colors';
 
 const Button = ({ text, size = 1, onClick, isDisabled, isFluid }) => {
   return (
-    <Wrap $size={size} $isFluid={isFluid} onClick={e => !isDisabled && onClick && onClick(e)}>
+    <Wrap $size={size} $isFluid={isFluid} $isDisabled={isDisabled} onClick={e => !isDisabled && onClick && onClick(e)}>
       {text && <span>{text}</span>}
     </Wrap>
   );
@@ -31,13 +31,14 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  pointer-events: ${props => (props.$isDisabled ? 'none' : 'auto')};
   font-size: ${props => (props.$size === 1 ? 20 : 24)}px;
   font-weight: 900;
   word-wrap: break-word;
   border-radius: 4px;
   background-color: ${colors.btnBackgroundMain};
   color: ${colors.textMain};
-  box-shadow: ${`0 0 0 2px ${colors.btnBackgroundMain}`};
+  box-shadow: ${`0 0 0 3px ${colors.btnBackgroundMain}`};
   transition:
     background-color 0.3s ease,
     border-color 0.3s ease,

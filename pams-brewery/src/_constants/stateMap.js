@@ -1,8 +1,11 @@
 const beerState = {
   allBeers: [],
   randomBeer: undefined,
+  foundBeersFromSearch: [],
+  nameValueForSearch: undefined,
   shouldFetchBeers: false,
   shouldGetRandomBeer: false,
+  shouldSearchForBeerByName: false,
 };
 
 const userState = {

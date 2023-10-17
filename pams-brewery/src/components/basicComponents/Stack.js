@@ -9,8 +9,8 @@ const Stack = ({
   children,
   spacing,
   flex,
-  width = 'auto', // Only string, so use 'px' as suffice
-  height = 'auto', // Only string, so use 'px' as suffice
+  width = 'auto', // Only string, so use 'px' as suffice when needed
+  height = 'auto', // Only string, so use 'px' as suffice when needed
   position,
   top,
   left,
@@ -18,10 +18,10 @@ const Stack = ({
   bottom,
   zIndex,
   cursor,
-  maxWidth, // Only string, so use 'px' as suffice
-  maxHeight, // Only string, so use 'px' as suffice
-  minWidth, // Only string, so use 'px' as suffice
-  minHeight, // Only string, so use 'px' as suffice
+  maxWidth, // Only string, so use 'px' as suffice when needed
+  maxHeight, // Only string, so use 'px' as suffice when needed
+  minWidth, // Only string, so use 'px' as suffice when needed
+  minHeight, // Only string, so use 'px' as suffice when needed
   margin,
   marginLeft,
   marginRight,

@@ -4,7 +4,12 @@ import { useEffect } from 'react';
 import apiServices from '../services/apiServices';
 
 const AccountHandler = () => {
-  const { shouldFetchBeers, shouldGetRandomBeer } = useStoreMe('shouldFetchBeers', 'shouldGetRandomBeer');
+  const { shouldFetchBeers, nameValueForSearch, shouldGetRandomBeer, shouldSearchForBeerByName } = useStoreMe(
+    'shouldFetchBeers',
+    'nameValueForSearch',
+    'shouldGetRandomBeer',
+    'shouldSearchForBeerByName'
+  );
 
   useEffect(
     function loadBeers() {
@@ -21,7 +26,6 @@ const AccountHandler = () => {
   useEffect(
     function loadRandomBeer() {
       if (shouldGetRandomBeer) {
-        console.log('asking for new beer in AccountHandler');
         apiServices
           .getRandomBeer()
           .then(res => setStoreMe({ randomBeer: res?.data[0], shouldGetRandomBeer: false }))
@@ -29,6 +33,23 @@ const AccountHandler = () => {
       }
     },
     [shouldGetRandomBeer]
+  );
+
+  useEffect(
+    function searchForBeerByName() {
+      if (shouldSearchForBeerByName) {
+        apiServices
+          .searchForBeer(nameValueForSearch)
+          .then(res =>
+            setStoreMe({
+              foundBeersFromSearch: res?.data,
+              shouldSearchForBeerByName: false,
+            })
+          )
+          .catch(err => err);
+      }
+    },
+    [shouldSearchForBeerByName]
   );
 };
 

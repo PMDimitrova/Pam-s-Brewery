@@ -14,10 +14,10 @@ const getRandomBeer = () => {
   });
 };
 
-const searchForBeer = beerName => {
+const searchForBeer = nameValueForSearch => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${endpoint}/beers`, { params: { beer_name: beerName } })
+      .get(`${endpoint}/beers`, { params: { beer_name: nameValueForSearch } })
       .then(resolve)
       .catch(reject);
   });
