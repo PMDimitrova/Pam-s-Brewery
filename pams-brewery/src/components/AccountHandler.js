@@ -1,6 +1,7 @@
 import { useStoreMe, setStoreMe } from 'store-me';
 import { useEffect } from 'react';
 
+import transformAllBeers from '../transformers/transformAllBeers';
 import apiServices from '../services/apiServices';
 
 const AccountHandler = () => {
@@ -16,7 +17,11 @@ const AccountHandler = () => {
       if (shouldFetchBeers) {
         apiServices
           .getAllBeers()
-          .then(res => setStoreMe({ allBeers: res?.data, shouldFetchBeers: false }))
+          .then(res => {
+            const transformedBeers = transformAllBeers(res.data);
+
+            setStoreMe({ allBeers: { ...transformedBeers }, shouldFetchBeers: false });
+          })
           .catch(err => err);
       }
     },
@@ -49,7 +54,7 @@ const AccountHandler = () => {
           .catch(err => err);
       }
     },
-    [shouldSearchForBeerByName]
+    [shouldSearchForBeerByName, nameValueForSearch]
   );
 };
 

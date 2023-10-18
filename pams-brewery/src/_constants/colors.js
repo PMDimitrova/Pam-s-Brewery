@@ -4,6 +4,8 @@ const colors = {
   textSecondary: '#FCC901',
   textTertiary: '#683800',
   textHover: '#FDFBDD',
+  iconMain: '#FFFFFF',
+  iconSecondary: '#F8B61B',
   btnBackgroundMain: '#DA9211',
   btnBackgroundHover: '#F8B61B',
   inputMain: '#FDFBDD',

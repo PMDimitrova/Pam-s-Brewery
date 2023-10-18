@@ -2,7 +2,6 @@ import { setStoreMe, useStoreMe } from 'store-me';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import canSound from '../sounds/can-opening.mp3';
 import Button from './basicComponents/Button';
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
@@ -17,14 +16,10 @@ const CataloguePage = () => {
   );
   const [searchValue, setSearchValue] = useState('');
   const [shouldShowSearchResult, setShouldShowSearchResult] = useState(false);
-  const beersToShow = shouldShowSearchResult ? foundBeersFromSearch : allBeers;
-  console.log('foundBeersFromSearch: ', foundBeersFromSearch);
-
-  const canOpeningAudio = new Audio(canSound);
+  const beersToShow = shouldShowSearchResult ? foundBeersFromSearch : Object.values(allBeers);
 
   const onInputChange = value => {
-    console.log('value: ', value);
-    // replaces blank spaces with underscore as per PunkAPI requirements
+    // Replaces blank spaces with underscore as per PunkAPI requirements
     const newValue = value.replace(/ |,/g, '_');
 
     if (value === '') {
@@ -35,19 +30,20 @@ const CataloguePage = () => {
   };
 
   const onSearchButtonClick = () => {
-    console.log('onSearchButtonClick: !!! ');
     setStoreMe({ shouldSearchForBeerByName: true, nameValueForSearch: searchValue });
     setShouldShowSearchResult(true);
   };
 
   useEffect(() => {
-    if (!shouldFetchBeers && allBeers.length === 0) {
+    const areNoBeersAlreadyLoaded = Object.keys(allBeers).length === 0;
+
+    if (!shouldFetchBeers && areNoBeersAlreadyLoaded) {
       setStoreMe({ shouldFetchBeers: true });
     }
-  }, [shouldFetchBeers]);
+  }, [shouldFetchBeers, allBeers]);
 
   // TODO: add pagination and request for next pages if there's time left
-  // if one more field pop up later on - use react final forms
+  // If one more field pop up later on - use react final forms
 
   return (
     <Wrap>
@@ -60,19 +56,14 @@ const CataloguePage = () => {
             minLength={350}
             placeholder="Type a name or part of it"
             onChange={e => onInputChange(e.target.value.trim())}
-            onKeyDown={e => e.keyCode === 13 && onSearchButtonClick()}
+            onKeyDown={e => e.keyCode === 13 && searchValue.trim() !== '' && onSearchButtonClick()}
           />
           <Button text="Search" isDisabled={searchValue.trim() === ''} onClick={() => onSearchButtonClick()} />
         </Stack>
 
         <Stack direction="row" alignItems="center" spacing={32} flexWrap="wrap" marginTop={32}>
           {beersToShow.map(beer => (
-            <BeerCard
-              beer={beer}
-              marginBottom="48px"
-              onClick={() => canOpeningAudio.play()}
-              key={`${beer.name}-${beer.first_brewed}`}
-            />
+            <BeerCard beer={beer} marginBottom="48px" key={`${beer.name}-${beer.first_brewed}`} />
           ))}
 
           {shouldShowSearchResult && foundBeersFromSearch.length == 0 && (

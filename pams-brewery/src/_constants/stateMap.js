@@ -1,7 +1,7 @@
 const beerState = {
-  allBeers: [],
-  randomBeer: undefined,
+  allBeers: {}, // Each key is the id of a beer, the value is the beer itself
   foundBeersFromSearch: [],
+  randomBeer: undefined,
   nameValueForSearch: undefined,
   shouldFetchBeers: false,
   shouldGetRandomBeer: false,
@@ -9,7 +9,7 @@ const beerState = {
 };
 
 const userState = {
-  likedBeers: [],
+  likedBeers: {}, // Each key is the id of a beer, the value is the beer itself
 };
 
 const generateInitialState = () => {

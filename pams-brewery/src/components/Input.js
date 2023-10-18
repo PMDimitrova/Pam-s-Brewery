@@ -21,6 +21,7 @@ const Input = ({ name, value, size = 1, isFocused, onChange, onKeyDown, placehol
 export default Input;
 
 Input.propTypes = {
+  name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: PropTypes.oneOf([1, 2]),
   isFocused: PropTypes.bool,
