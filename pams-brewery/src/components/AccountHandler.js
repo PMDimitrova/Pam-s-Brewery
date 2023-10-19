@@ -5,7 +5,20 @@ import transformAllBeers from '../transformers/transformAllBeers';
 import apiServices from '../services/apiServices';
 
 const AccountHandler = () => {
-  const { shouldFetchBeers, nameValueForSearch, shouldGetRandomBeer, shouldSearchForBeerByName } = useStoreMe(
+  const {
+    allBeers,
+    likedBeers,
+    beerToLike,
+    beerToDislike,
+    shouldFetchBeers,
+    nameValueForSearch,
+    shouldGetRandomBeer,
+    shouldSearchForBeerByName,
+  } = useStoreMe(
+    'allBeers',
+    'likedBeers',
+    'beerToLike',
+    'beerToDislike',
     'shouldFetchBeers',
     'nameValueForSearch',
     'shouldGetRandomBeer',
@@ -55,6 +68,39 @@ const AccountHandler = () => {
       }
     },
     [shouldSearchForBeerByName, nameValueForSearch]
+  );
+
+  useEffect(
+    function likeBeer() {
+      if (beerToLike) {
+        const { id } = beerToLike;
+        const likedBeer = { ...beerToLike, isBeerLiked: true };
+
+        setStoreMe({
+          likedBeers: { ...likedBeers, [id]: { ...likedBeer } },
+          allBeers: { ...allBeers, [id]: { ...likedBeer } },
+          beerToLike: undefined,
+        });
+      }
+    },
+    [beerToLike, likedBeers, allBeers]
+  );
+
+  useEffect(
+    function dislikeBeer() {
+      if (beerToDislike) {
+        const { id } = beerToDislike;
+        const dislikedBeer = { ...beerToDislike, isBeerLiked: false };
+        const { [id]: idToDislike, ...newLikedBeers } = likedBeers;
+
+        setStoreMe({
+          likedBeers: { ...newLikedBeers },
+          allBeers: { ...allBeers, [id]: { ...dislikedBeer } },
+          beerToDislike: undefined,
+        });
+      }
+    },
+    [beerToDislike, likedBeers, allBeers]
   );
 };
 

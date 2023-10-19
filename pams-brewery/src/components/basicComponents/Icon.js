@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import colors from '../../_constants/colors';
 
-const Icon = ({ icon, size = 12, color, onClick }) => {
-  return <Wrap $size={size} className={icon} $color={color} onClick={onClick} />;
+const Icon = ({ icon, isIconSolid, size = 12, color = 'iconMain' }) => {
+  const type = isIconSolid ? 'fa-solid' : 'fa-regular';
+  return <Wrap $size={size} className={`${type} ${icon}`} $color={color} />;
 };
 
 export default Icon;
@@ -12,8 +13,7 @@ export default Icon;
 Icon.propTypes = {
   icon: PropTypes.string,
   size: PropTypes.number,
-  color: PropTypes.oneOf(['iconMain', 'iconSecondary']),
-  onClick: PropTypes.func,
+  color: PropTypes.oneOf(['iconMain', 'iconSecondary', 'iconTertiary']),
 };
 
 const Wrap = styled.i`

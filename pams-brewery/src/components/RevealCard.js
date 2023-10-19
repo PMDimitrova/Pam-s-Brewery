@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
-import colors from '../_constants/colors';
+import Icon from './basicComponents/Icon';
 
 // TODO: what would happen, if the api doesn't return a beer.?
 
@@ -13,7 +13,7 @@ const RevealCard = ({ beerToShow, shouldShowBeer }) => {
       {shouldShowBeer && (
         <Stack direction="row" width="100%" justifyContent="space-between">
           <Stack maxWidth="370px" paddingTop={40}>
-            <Text text="Try this:" heading={2} />
+            <Text text="Try this:" heading={2} weight={700} />
 
             <Stack>
               <Stack direction="row" spacing={16}>
@@ -28,11 +28,22 @@ const RevealCard = ({ beerToShow, shouldShowBeer }) => {
             </Stack>
           </Stack>
 
-          {beerToShow.image_url && <img src={beerToShow.image_url} height={350} alt="beer" />}
+          {beerToShow.image_url ? (
+            <img src={beerToShow.image_url} height={350} alt="beer" />
+          ) : (
+            <Stack direction="row" spacing={24} alignItems="center">
+              <Text text="NO" heading={2} />
+              <Icon icon="fa-image" isIconSolid={false} size={60} />
+            </Stack>
+          )}
         </Stack>
       )}
 
-      {!shouldShowBeer && <Inner shouldShowBeer={shouldShowBeer}>?</Inner>}
+      {!shouldShowBeer && (
+        <Inner>
+          <Icon icon="fa-regular fa-circle-question" size={150} color="iconTertiary" />
+        </Inner>
+      )}
     </Wrap>
   );
 };
@@ -57,10 +68,4 @@ const Inner = styled.div`
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 450px;
-  font-size: 300px;
-  font-weight: 900;
-  color: ${colors.textMain};
-  background-color: ${colors.background};
 `;

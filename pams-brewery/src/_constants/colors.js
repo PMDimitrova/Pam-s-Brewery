@@ -6,6 +6,7 @@ const colors = {
   textHover: '#FDFBDD',
   iconMain: '#FFFFFF',
   iconSecondary: '#F8B61B',
+  iconTertiary: '#FDFBDD',
   btnBackgroundMain: '#DA9211',
   btnBackgroundHover: '#F8B61B',
   inputMain: '#FDFBDD',

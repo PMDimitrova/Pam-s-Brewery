@@ -1,30 +1,37 @@
-import { useStoreMe, setStoreMe } from 'store-me';
 import styled from 'styled-components';
+import { setStoreMe } from 'store-me';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import canSound from '../sounds/can-opening.mp3';
+import dislikeSound from '../sounds/remove.mp3';
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
 import colors from '../_constants/colors';
 import Icon from './basicComponents/Icon';
 
 const BeerCard = ({ beer, marginBottom }) => {
-  const { likedBeers } = useStoreMe('likedBeers');
-  const { name, image_url, isBeerLiked, id, hashedBeer } = beer;
-  const canOpeningAudio = new Audio(canSound);
-  const likeIconType = isBeerLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
-  const likeIconColor = isBeerLiked ? 'iconSecondary' : 'iconMain';
+  const { name, image_url, isBeerLiked } = beer;
+  const [isBeerLikedLocal, setIsBeerLikedLocal] = useState(isBeerLiked);
+  const likeBeerSound = new Audio(canSound);
+  const dislikeBeerSound = new Audio(dislikeSound);
+  const likeIconType = isBeerLikedLocal ? 'fa-heart' : 'fa-heart';
+  const likeIconColor = isBeerLikedLocal ? 'iconSecondary' : 'iconMain';
 
-  const likeBeer = () => {
+  const likeOrDislikeBeer = () => {
     /*
       As per the initial task the sound should be played when the beer is clicked,
-      but I find it much more suitable to play it when a beer is liked
+      but I find it much more suitable to play it when a beer is liked or disliked
     */
-    if (!isBeerLiked) {
-      canOpeningAudio.play();
+    if (isBeerLiked) {
+      dislikeBeerSound.play();
+      setStoreMe({ beerToDislike: beer });
+      setIsBeerLikedLocal(false);
+    } else {
+      likeBeerSound.play();
+      setStoreMe({ beerToLike: beer });
+      setIsBeerLikedLocal(true);
     }
-
-    const likedBeer = { ...beer, isBeerLiked: true };
   };
 
   return (
@@ -35,8 +42,10 @@ const BeerCard = ({ beer, marginBottom }) => {
 
       <HoverCard>
         <Stack paddingLeft={32} paddingRight={32} width="100%" height="100%" justifyContent="space-between">
-          <Stack alignItems="flex-end" onClick={() => likeBeer()}>
-            <Icon icon={likeIconType} size={24} color={likeIconColor} />
+          <Stack alignItems="flex-end">
+            <Stack onClick={() => likeOrDislikeBeer()}>
+              <Icon icon={likeIconType} isIconSolid={isBeerLikedLocal} size={24} color={likeIconColor} />
+            </Stack>
           </Stack>
 
           <Stack>

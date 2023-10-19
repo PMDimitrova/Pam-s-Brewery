@@ -24,7 +24,7 @@ const AdventurePage = () => {
   return (
     <Wrap>
       <Stack maxWidth="300px" justifyContent="center">
-        <Text text="Wondering what you want to drink today?" heading={1} weight={700} />
+        <Text text="Wondering what you want to drink today?" heading={1} weight={700} textAlign="center" />
         <Button
           text={gotBeer ? 'Show me something else' : 'Ask the Universe'}
           onClick={() => setStoreMe({ shouldGetRandomBeer: true })}

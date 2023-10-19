@@ -48,7 +48,7 @@ const CataloguePage = () => {
   return (
     <Wrap>
       <Stack spacing={48} alignItems="center">
-        <Text text="Catalogue" heading={1} />
+        <Text text="Catalogue" heading={1} isNotSelectable />
 
         <Stack direction="row" alignItems="center" spacing={24}>
           <Input

@@ -8,7 +8,7 @@ const Text = ({
   heading,
   body,
   component,
-  weight = 400, // Ccs prop font-weight
+  weight = 400, // CCS prop font-weight
   color = 'textMain',
   onHoverColor,
   text,
@@ -21,6 +21,9 @@ const Text = ({
   maxWidth, // Only string, so use 'px' as suffice
   isNotSelectable,
 }) => {
+  const isSuppliedTextArray = Array.isArray(text);
+  const displayText = isSuppliedTextArray ? text.join('. ') : text;
+
   return (
     <Wrap
       $typographyType={(heading && 'heading') || 'body'}
@@ -38,7 +41,7 @@ const Text = ({
       $maxWidth={maxWidth}
       $isNotSelectable={isNotSelectable}
     >
-      {children || text}
+      {children || displayText}
     </Wrap>
   );
 };
@@ -49,7 +52,7 @@ Text.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
   heading: PropTypes.oneOf([1, 2, 3, 4]),
   body: PropTypes.oneOf([1, 2]),
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   component: PropTypes.oneOf(['div', 'span', 'p']),
   weight: PropTypes.oneOf([400, 500, 700, 900]),
   id: PropTypes.string,
