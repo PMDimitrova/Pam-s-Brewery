@@ -2,10 +2,14 @@ const beerState = {
   allBeers: {}, // Each key is the id of a beer, the value is the beer itself
   foundBeersFromSearch: [],
   randomBeer: undefined,
-  nameValueForSearch: undefined,
+};
+
+const appState = {
   shouldFetchBeers: false,
   shouldGetRandomBeer: false,
   shouldSearchForBeerByName: false,
+  shouldCheckFavoritesForChange: false,
+  nameValueForSearch: undefined,
 };
 
 const userState = {
@@ -17,6 +21,7 @@ const userState = {
 const generateInitialState = () => {
   const stateMap = {
     ...beerState,
+    ...appState,
     ...userState,
   };
 

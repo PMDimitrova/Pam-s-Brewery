@@ -33,7 +33,7 @@ const RevealCard = ({ beerToShow, shouldShowBeer }) => {
           ) : (
             <Stack direction="row" spacing={24} alignItems="center">
               <Text text="NO" heading={2} />
-              <Icon icon="fa-image" isIconSolid={false} size={60} />
+              <Icon icon="fa-image" isSolidIcon={false} size={60} />
             </Stack>
           )}
         </Stack>

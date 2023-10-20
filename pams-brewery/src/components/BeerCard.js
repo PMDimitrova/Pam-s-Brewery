@@ -10,8 +10,8 @@ import Text from './basicComponents/Text';
 import colors from '../_constants/colors';
 import Icon from './basicComponents/Icon';
 
-const BeerCard = ({ beer, marginBottom }) => {
-  const { name, image_url, isBeerLiked } = beer;
+const BeerCard = ({ beer, marginBottom, shouldShowChangeDev }) => {
+  const { name, image_url, isBeerLiked, hasBeerChanged } = beer;
   const [isBeerLikedLocal, setIsBeerLikedLocal] = useState(isBeerLiked);
   const likeBeerSound = new Audio(canSound);
   const dislikeBeerSound = new Audio(dislikeSound);
@@ -37,6 +37,10 @@ const BeerCard = ({ beer, marginBottom }) => {
   return (
     <Stack position="relative" maxWidth="100%">
       <Card $marginBottom={marginBottom}>
+        <IconWrapper $shouldShow={shouldShowChangeDev || hasBeerChanged}>
+          <Icon icon="fa-bell" size={24} isSolidIcon color="iconTertiary" />
+        </IconWrapper>
+
         <img src={image_url} height={350} alt="beer" />
       </Card>
 
@@ -44,7 +48,7 @@ const BeerCard = ({ beer, marginBottom }) => {
         <Stack paddingLeft={32} paddingRight={32} width="100%" height="100%" justifyContent="space-between">
           <Stack alignItems="flex-end">
             <Stack onClick={() => likeOrDislikeBeer()}>
-              <Icon icon={likeIconType} isIconSolid={isBeerLikedLocal} size={24} color={likeIconColor} />
+              <Icon icon={likeIconType} isSolidIcon={isBeerLikedLocal} size={24} color={likeIconColor} />
             </Stack>
           </Stack>
 
@@ -62,6 +66,7 @@ export default BeerCard;
 BeerCard.propTypes = {
   beer: PropTypes.object,
   marginBottom: PropTypes.string,
+  shouldShowChangeDev: PropTypes.bool,
 };
 
 // TODO: width & height should not be static
@@ -90,4 +95,8 @@ const HoverCard = styled.div`
   &:hover {
     opacity: 75%;
   }
+`;
+
+const IconWrapper = styled.div`
+  opacity: ${props => (props.$shouldShow ? '100%' : 0)};
 `;

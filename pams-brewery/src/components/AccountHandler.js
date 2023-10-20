@@ -1,8 +1,9 @@
 import { useStoreMe, setStoreMe } from 'store-me';
 import { useEffect } from 'react';
 
-import transformAllBeers from '../transformers/transformAllBeers';
+import transformAllBeers from '../utils/transformAllBeers';
 import apiServices from '../services/apiServices';
+import hashing from '../utils/hashing';
 
 const AccountHandler = () => {
   const {
@@ -14,6 +15,7 @@ const AccountHandler = () => {
     nameValueForSearch,
     shouldGetRandomBeer,
     shouldSearchForBeerByName,
+    shouldCheckFavoritesForChange,
   } = useStoreMe(
     'allBeers',
     'likedBeers',
@@ -22,7 +24,8 @@ const AccountHandler = () => {
     'shouldFetchBeers',
     'nameValueForSearch',
     'shouldGetRandomBeer',
-    'shouldSearchForBeerByName'
+    'shouldSearchForBeerByName',
+    'shouldCheckFavoritesForChange'
   );
 
   useEffect(
@@ -57,7 +60,7 @@ const AccountHandler = () => {
     function searchForBeerByName() {
       if (shouldSearchForBeerByName) {
         apiServices
-          .searchForBeer(nameValueForSearch)
+          .searchForBeerByName(nameValueForSearch)
           .then(res =>
             setStoreMe({
               foundBeersFromSearch: res?.data,
@@ -102,6 +105,45 @@ const AccountHandler = () => {
     },
     [beerToDislike, likedBeers, allBeers]
   );
+
+  useEffect(function checkForChangesInFavorites() {
+    /*
+      The flow of searching for changes would be the following:
+        1) make API call with all the ids of the liked beers
+        2) take the response with the beers and generate new hashes for each beer
+        3) compare the hash of the response with the has of the corresponding beer (by id) in our liked list
+        4) if there's difference in the hash, this would mean that there's even a singe char difference in the data of the beer
+    */
+    if (shouldCheckFavoritesForChange) {
+      const idsOfLikedBeers = Object.keys(likedBeers).join('|');
+
+      apiServices
+        .searchForBeersByID(idsOfLikedBeers)
+        .then(res => {
+          res.data.forEach(beer => {
+            const beerId = beer.id;
+            const currentHash = allBeers[beerId].hashedBeer;
+            const receivedBeerHash = hashing(beer);
+            const hasBeerChanged = currentHash !== receivedBeerHash;
+            const dataOfBeer = allBeers[beerId];
+            /* If we need to, we can compare the data of the received beer and the data in our system and change that as well.
+            But that's not as per task's requirements */
+            const newBeerData = { ...dataOfBeer, hasBeerChanged: true, hashedBeer: receivedBeerHash };
+
+            if (hasBeerChanged) {
+              setStoreMe({
+                allBeers: { ...allBeers, [beerId]: { ...newBeerData } },
+                likedBeers: { ...likedBeers, [beerId]: { ...newBeerData } },
+              });
+            }
+          });
+        })
+        .catch(err => err);
+
+      setStoreMe({ shouldCheckFavoritesForChange: false });
+    }
+  }),
+    [shouldCheckFavoritesForChange];
 };
 
 export default AccountHandler;

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import colors from '../../_constants/colors';
 
-const Icon = ({ icon, isIconSolid, size = 12, color = 'iconMain' }) => {
-  const type = isIconSolid ? 'fa-solid' : 'fa-regular';
+const Icon = ({ icon, isSolidIcon, size = 12, color = 'iconMain' }) => {
+  const type = isSolidIcon ? 'fa-solid' : 'fa-regular';
+
   return <Wrap $size={size} className={`${type} ${icon}`} $color={color} />;
 };
 
@@ -12,6 +13,7 @@ export default Icon;
 
 Icon.propTypes = {
   icon: PropTypes.string,
+  isSolidIcon: PropTypes.bool,
   size: PropTypes.number,
   color: PropTypes.oneOf(['iconMain', 'iconSecondary', 'iconTertiary']),
 };

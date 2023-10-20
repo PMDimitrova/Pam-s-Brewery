@@ -14,7 +14,7 @@ const getRandomBeer = () => {
   });
 };
 
-const searchForBeer = nameValueForSearch => {
+const searchForBeerByName = nameValueForSearch => {
   return new Promise((resolve, reject) => {
     axios
       .get(`${endpoint}/beers`, { params: { beer_name: nameValueForSearch } })
@@ -23,10 +23,18 @@ const searchForBeer = nameValueForSearch => {
   });
 };
 
+const searchForBeersByID = ids => {
+  // Receives multiple ids divided by | as a string
+  return new Promise((resolve, reject) => {
+    axios.get(`${endpoint}/beers`, { params: { ids } }).then(resolve).catch(reject);
+  });
+};
+
 const apiServices = {
   getAllBeers,
   getRandomBeer,
-  searchForBeer,
+  searchForBeerByName,
+  searchForBeersByID,
 };
 
 export default apiServices;
