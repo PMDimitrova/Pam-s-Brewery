@@ -32,6 +32,8 @@
     "stylelint-config-recommended": "^13.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylis": "^4.3.0",
+    "viem": "^1.16.6",
+    "wagmi": "^1.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -65,5 +67,8 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }

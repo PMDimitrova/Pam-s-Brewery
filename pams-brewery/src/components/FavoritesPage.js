@@ -1,7 +1,9 @@
 import { setStoreMe, useStoreMe } from 'store-me';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useAccount } from 'wagmi';
 
+import PleaseConnectWallet from './PleaseConnectWallet';
 import Button from './basicComponents/Button';
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
@@ -10,6 +12,8 @@ import BeerCard from './BeerCard';
 const FavoritesPage = () => {
   const { likedBeers } = useStoreMe('likedBeers');
   const [shouldShowBeerChange, setShouldShowBeerChange] = useState(false);
+  const { isConnected } = useAccount();
+
   const beersToShow = Object.values(likedBeers);
 
   const showSignOfChangedBeer = () => {
@@ -30,31 +34,37 @@ const FavoritesPage = () => {
   return (
     <Wrap>
       <Stack spacing={48} alignItems="center">
-        <Text text="Favorite Beers" heading={1} isNotSelectable />
+        <Text text="Favorite Beers" heading={1} isNotSelectable weight={700} />
 
-        {beersToShow.length !== 0 && (
-          <Inner>
-            <Text
-              text="For dev purposes: If you want to see how it will look if some beer is changed from the API "
-              body={1}
-              paddingRight={16}
-            />
-            <Button text="click" onClick={() => showSignOfChangedBeer()} />
-          </Inner>
+        {isConnected ? (
+          <>
+            {beersToShow.length !== 0 && (
+              <Inner>
+                <Text
+                  text="For dev purposes: If you want to see how it will look if some beer is changed from the API "
+                  body={1}
+                  paddingRight={16}
+                />
+                <Button text="click" onClick={() => showSignOfChangedBeer()} />
+              </Inner>
+            )}
+
+            <Stack direction="row" alignItems="center" spacing={32} flexWrap="wrap" marginTop={32}>
+              {beersToShow.map(beer => (
+                <BeerCard
+                  beer={beer}
+                  marginBottom="48px"
+                  key={`${beer.name}-${beer.first_brewed}`}
+                  shouldShowChangeDev={shouldShowBeerChange}
+                />
+              ))}
+
+              {beersToShow.length === 0 && <Text text="You have not liked a beer yet" heading={3} />}
+            </Stack>
+          </>
+        ) : (
+          <PleaseConnectWallet />
         )}
-
-        <Stack direction="row" alignItems="center" spacing={32} flexWrap="wrap" marginTop={32}>
-          {beersToShow.map(beer => (
-            <BeerCard
-              beer={beer}
-              marginBottom="48px"
-              key={`${beer.name}-${beer.first_brewed}`}
-              shouldShowChangeDev={shouldShowBeerChange}
-            />
-          ))}
-
-          {beersToShow.length === 0 && <Text text="You have not liked a beer yet" heading={3} />}
-        </Stack>
       </Stack>
     </Wrap>
   );

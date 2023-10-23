@@ -5,9 +5,15 @@ import colors from '../../_constants/colors';
 
 // TODO: mapping for different color buttons? would I need this?
 
-const Button = ({ text, size = 1, onClick, isDisabled, isFluid }) => {
+const Button = ({ text, size = 1, onClick, isDisabled, isFluid, maxWidth }) => {
   return (
-    <Wrap $size={size} $isFluid={isFluid} $isDisabled={isDisabled} onClick={e => !isDisabled && onClick && onClick(e)}>
+    <Wrap
+      $size={size}
+      $isFluid={isFluid}
+      $isDisabled={isDisabled}
+      $maxWidth={maxWidth}
+      onClick={e => !isDisabled && onClick && onClick(e)}
+    >
       {text && <span>{text}</span>}
     </Wrap>
   );
@@ -21,12 +27,14 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
   isFluid: PropTypes.bool,
+  maxWidth: PropTypes.number,
 };
 
 const Wrap = styled.div`
   display: flex;
   width: ${({ $isFluid }) => ($isFluid ? '100%' : null)};
   height: ${props => (props.$size === 1 ? 40 : 48)}px;
+  max-width: ${props => props.$maxWidth}px;
   padding: 0 16px;
   align-items: center;
   justify-content: center;

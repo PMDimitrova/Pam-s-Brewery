@@ -52,6 +52,14 @@ const Header = () => {
           onClick={() => navigate('/on-adventure')}
           isNotSelectable
         />
+        <Text
+          text="web3 profile"
+          heading={4}
+          textTransform="uppercase"
+          onHoverColor="textSecondary"
+          onClick={() => navigate('/web3profile')}
+          isNotSelectable
+        />
       </Stack>
     </Wrap>
   );

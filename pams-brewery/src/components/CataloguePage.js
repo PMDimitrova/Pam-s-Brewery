@@ -1,7 +1,9 @@
 import { setStoreMe, useStoreMe } from 'store-me';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useAccount } from 'wagmi';
 
+import PleaseConnectWallet from './PleaseConnectWallet';
 import Button from './basicComponents/Button';
 import Stack from './basicComponents/Stack';
 import Text from './basicComponents/Text';
@@ -16,6 +18,8 @@ const CataloguePage = () => {
   );
   const [searchValue, setSearchValue] = useState('');
   const [shouldShowSearchResult, setShouldShowSearchResult] = useState(false);
+  const { isConnected } = useAccount();
+
   const beersToShow = shouldShowSearchResult ? foundBeersFromSearch : Object.values(allBeers);
 
   const onInputChange = value => {
@@ -48,28 +52,34 @@ const CataloguePage = () => {
   return (
     <Wrap>
       <Stack spacing={48} alignItems="center">
-        <Text text="Catalogue" heading={1} isNotSelectable />
+        <Text text="Catalogue" heading={1} isNotSelectable weight={700} />
 
-        <Stack direction="row" alignItems="center" spacing={24}>
-          <Input
-            value={searchValue}
-            minLength={350}
-            placeholder="Type a name or part of it"
-            onChange={e => onInputChange(e.target.value.trim())}
-            onKeyDown={e => e.keyCode === 13 && searchValue.trim() !== '' && onSearchButtonClick()}
-          />
-          <Button text="Search" isDisabled={searchValue.trim() === ''} onClick={() => onSearchButtonClick()} />
-        </Stack>
+        {isConnected ? (
+          <>
+            <Stack direction="row" alignItems="center" spacing={24}>
+              <Input
+                value={searchValue}
+                minLength={350}
+                placeholder="Type a name or part of it"
+                onChange={e => onInputChange(e.target.value.trim())}
+                onKeyDown={e => e.keyCode === 13 && searchValue.trim() !== '' && onSearchButtonClick()}
+              />
+              <Button text="Search" isDisabled={searchValue.trim() === ''} onClick={() => onSearchButtonClick()} />
+            </Stack>
 
-        <Stack direction="row" alignItems="center" spacing={32} flexWrap="wrap" marginTop={32}>
-          {beersToShow.map(beer => (
-            <BeerCard beer={beer} marginBottom="48px" key={`${beer.name}-${beer.first_brewed}`} />
-          ))}
+            <Stack direction="row" alignItems="center" spacing={32} flexWrap="wrap" marginTop={32}>
+              {beersToShow.map(beer => (
+                <BeerCard beer={beer} marginBottom="48px" key={`${beer.name}-${beer.first_brewed}`} />
+              ))}
 
-          {shouldShowSearchResult && foundBeersFromSearch.length == 0 && (
-            <Text text="No result for your search" heading={3} weight={700} />
-          )}
-        </Stack>
+              {shouldShowSearchResult && foundBeersFromSearch.length == 0 && (
+                <Text text="No result for your search" heading={3} weight={700} />
+              )}
+            </Stack>
+          </>
+        ) : (
+          <PleaseConnectWallet />
+        )}
       </Stack>
     </Wrap>
   );

@@ -1,5 +1,7 @@
+import Text from './basicComponents/Text';
+
 const ErrorPage = () => {
-  return <div>You`re searching for something that`s not here</div>;
+  return <Text text="You`re searching for something that`s not here" heading={1} textAlign="center" />;
 };
 
 export default ErrorPage;

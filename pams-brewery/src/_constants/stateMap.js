@@ -18,11 +18,17 @@ const userState = {
   beerToDislike: undefined,
 };
 
+const walletState = {
+  shouldConnectToMM: false,
+  shouldDisconnectFromMM: false,
+};
+
 const generateInitialState = () => {
   const stateMap = {
     ...beerState,
     ...appState,
     ...userState,
+    ...walletState,
   };
 
   return stateMap;

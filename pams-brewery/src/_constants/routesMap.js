@@ -1,3 +1,4 @@
+import Web3ProfilePage from '../components/Web3ProfilePage';
 import CataloguePage from '../components/CataloguePage';
 import AdventurePage from '../components/AdventurePage';
 import FavoritesPage from '../components/FavoritesPage';
@@ -20,6 +21,10 @@ const routesStructure = {
   favorites: {
     path: '/favorites',
     element: <FavoritesPage />,
+  },
+  profile: {
+    path: '/web3profile',
+    element: <Web3ProfilePage />,
   },
   error: {
     path: '*',

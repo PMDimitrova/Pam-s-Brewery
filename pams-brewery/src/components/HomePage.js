@@ -34,6 +34,16 @@ const Home = () => {
           />
           <Text text="and see what the Universe will suggest to you" heading={1} isNotSelectable />
         </Stack>
+
+        <Stack direction="row" alignItems="center" spacing={16}>
+          <Text text="If you want to use our functionalities, please " heading={1} isNotSelectable />
+          <Text
+            text="connect your MetaMask Account"
+            heading={1}
+            onHoverColor="textSecondary"
+            onClick={() => navigate('/web3profile')}
+          />
+        </Stack>
       </Stack>
     </Wrap>
   );
