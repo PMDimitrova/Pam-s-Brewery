@@ -19,7 +19,7 @@ const WalletHandler = () => {
         setStoreMe({ shouldConnectToMM: false });
       }
     },
-    [shouldConnectToMM]
+    [shouldConnectToMM, isConnected, MetaMaskConnector, connect]
   );
 
   useEffect(
@@ -29,7 +29,7 @@ const WalletHandler = () => {
         setStoreMe({ shouldDisconnectFromMM: false });
       }
     },
-    [shouldDisconnectFromMM]
+    [shouldDisconnectFromMM, isConnected, disconnect]
   );
 };
 

@@ -27,7 +27,14 @@ const Web3ProfilePage = () => {
             <Button text="Disconnect from MM" onClick={() => setStoreMe({ shouldDisconnectFromMM: true })} />
           </Stack>
         ) : (
-          <Stack direction="row" maxWidth="650px" width="100%" justifyContent="space-between" alignItems="center">
+          <Stack
+            direction="row"
+            spacing={32}
+            maxWidth="650px"
+            width="100%"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Text text="For full access connect your MetaMask Wallet" heading={2} maxWidth="350px" />
 
             <Button text="Connect" onClick={() => setStoreMe({ shouldConnectToMM: true })} maxWidth={100} />
