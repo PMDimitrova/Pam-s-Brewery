@@ -11,8 +11,9 @@ import BeerCard from './BeerCard';
 import Input from './Input';
 
 const CataloguePage = () => {
-  const { allBeers, shouldFetchBeers, foundBeersFromSearch } = useStoreMe(
+  const { allBeers,isWeb3CheckOFF, shouldFetchBeers, foundBeersFromSearch } = useStoreMe(
     'allBeers',
+    'isWeb3CheckOFF',
     'shouldFetchBeers',
     'foundBeersFromSearch'
   );
@@ -54,7 +55,7 @@ const CataloguePage = () => {
       <Stack spacing={48} alignItems="center">
         <Text text="Catalogue" heading={1} isNotSelectable weight={700} />
 
-        {isConnected ? (
+        {isConnected || isWeb3CheckOFF ? (
           <>
             <Stack direction="row" alignItems="center" spacing={24}>
               <Input

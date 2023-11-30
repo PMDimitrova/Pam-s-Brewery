@@ -1,12 +1,15 @@
+import { useStoreMe,setStoreMe } from 'store-me';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from './basicComponents/Button';
 import Stack from './basicComponents/Stack';
 import barrels from '../images/Barrels.jpg';
 import colors from '../_constants/colors';
 import Text from './basicComponents/Text';
 
 const Home = () => {
+  const {isWeb3CheckOFF} = useStoreMe('isWeb3CheckOFF');
   const navigate = useNavigate();
 
   return (
@@ -43,6 +46,14 @@ const Home = () => {
             onHoverColor="textSecondary"
             onClick={() => navigate('/web3profile')}
           />
+        </Stack>
+
+        <Stack direction="row" alignItems="center" spacing={16}>
+         <Text text="Web3 functionalities are" heading={1} isNotSelectable />
+          {isWeb3CheckOFF ?
+          (<Button text='OFF' onClick={() => setStoreMe({isWeb3CheckOFF: false})}/>) :
+          (<Button text='ON' onClick={() => setStoreMe({isWeb3CheckOFF: true})}/>)
+          }
         </Stack>
       </Stack>
     </Wrap>

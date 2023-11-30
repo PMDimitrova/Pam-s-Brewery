@@ -10,7 +10,7 @@ import Text from './basicComponents/Text';
 import BeerCard from './BeerCard';
 
 const FavoritesPage = () => {
-  const { likedBeers } = useStoreMe('likedBeers');
+  const { likedBeers, isWeb3CheckOFF } = useStoreMe('likedBeers', 'isWeb3CheckOFF');
   const [shouldShowBeerChange, setShouldShowBeerChange] = useState(false);
   const { isConnected } = useAccount();
 
@@ -36,7 +36,7 @@ const FavoritesPage = () => {
       <Stack spacing={48} alignItems="center">
         <Text text="Favorite Beers" heading={1} isNotSelectable weight={700} />
 
-        {isConnected ? (
+        {isConnected || isWeb3CheckOFF ? (
           <>
             {beersToShow.length !== 0 && (
               <Inner>

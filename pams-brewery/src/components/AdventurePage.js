@@ -10,7 +10,7 @@ import Text from './basicComponents/Text';
 import RevealCard from './RevealCard';
 
 const AdventurePage = () => {
-  const { randomBeer } = useStoreMe('randomBeer');
+  const { randomBeer, isWeb3CheckOFF } = useStoreMe('randomBeer', 'isWeb3CheckOFF');
   const [beerToShow, setBeerToShow] = useState({});
   const [gotBeer, setGotBeer] = useState(false);
   const { isConnected } = useAccount();
@@ -28,7 +28,7 @@ const AdventurePage = () => {
     <Wrap>
       <Text text="Wondering what you want to drink today?" heading={1} weight={700} textAlign="center" />
 
-      {isConnected ? (
+      {isConnected || isWeb3CheckOFF ? (
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Button
             text={gotBeer ? 'Show me something else' : 'Ask the Universe'}

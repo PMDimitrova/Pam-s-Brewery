@@ -10,6 +10,7 @@ const appState = {
   shouldSearchForBeerByName: false,
   shouldCheckFavoritesForChange: false,
   nameValueForSearch: undefined,
+  isWeb3CheckOFF: true, // this is by default true, so that even if you don't have MetaMask wallet, you can browse see the app
 };
 
 const userState = {
